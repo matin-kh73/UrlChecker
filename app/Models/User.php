@@ -40,4 +40,14 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    /**
+     * Each user has many urls
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function urls()
+    {
+        return $this->hasMany(Url::class);
+    }
 }

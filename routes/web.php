@@ -27,5 +27,11 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'API\\V1'], function() use 
 
     $router->group(['middleware' => 'client'], function () use ($router) {
 
+        $router->group(['prefix' => 'urls'], function () use ($router) {
+            $router->get('/', 'UrlController@index');
+            $router->post('/', 'UrlController@store');
+            $router->put('/{id}', 'UrlController@update');
+            $router->delete('/{id}', 'UrlController@destroy');
+        });
     });
 });
