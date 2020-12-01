@@ -63,6 +63,7 @@ $app->configure('app');
 
 // Load auth config files
 $app->configure('auth');
+$app->configure('urls');
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +103,7 @@ $app->register(Laravel\Passport\PassportServiceProvider::class);
 $app->register(Dusterio\LumenPassport\PassportServiceProvider::class);
 $app->register(\App\Providers\ResponseMacroServiceProvider::class);
 $app->register(\App\Providers\RequestServiceProvider::class);
+$app->register(\Illuminate\Redis\RedisServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------

@@ -33,5 +33,10 @@ $router->group(['prefix' => 'api/v1', 'namespace' => 'API\\V1'], function() use 
             $router->put('/{id}', 'UrlController@update');
             $router->delete('/{id}', 'UrlController@destroy');
         });
+
+        $router->group(['prefix' => 'results'], function () use ($router) {
+            $router->get('/', 'ResultController@index');
+            $router->delete('/{id}', 'ResultController@destroy');
+        });
     });
 });
