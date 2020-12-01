@@ -50,4 +50,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany(Url::class);
     }
+
+    /**
+     * Get all of the results for the user.
+     */
+    public function results()
+    {
+        return $this->hasManyThrough(Result::class, Url::class);
+    }
 }
