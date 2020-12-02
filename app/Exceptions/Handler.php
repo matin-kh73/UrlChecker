@@ -3,9 +3,12 @@
 namespace App\Exceptions;
 
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
+use Laravel\Passport\Exceptions\OAuthServerException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
 
@@ -49,6 +52,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof OAuthServerException) {
+            return Response::error($exception->getMessage(), 400);
+        }
+        if ($exception instanceof AuthenticationException) {
+            return Response::error($exception->getMessage(), 401);
+        }
         return parent::render($request, $exception);
     }
 }
