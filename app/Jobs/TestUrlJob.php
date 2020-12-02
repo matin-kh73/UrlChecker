@@ -21,7 +21,7 @@ class TestUrlJob extends Job
     /**
      * @var Url
      */
-    private $url;
+    public $url;
 
     /**
      * @var string
@@ -67,7 +67,8 @@ class TestUrlJob extends Job
                 RateLimiter::clear($this->actionKey);
                 break;
             } catch (\Exception $exception) {
-                Log::error("job_id : {$this->job->getJobId()} & link : {$this->url->link}  {$exception->getMessage()}");
+                $jobId = optional($this->job)->getJobId();
+                Log::error("job_id : $jobId & link : {$this->url->link}  {$exception->getMessage()}");
                 RateLimiter::hit($this->actionKey, Carbon::now()->addMinutes($this->dacyTime));
             }
         }
